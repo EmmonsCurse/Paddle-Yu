@@ -1,3 +1,7 @@
+#!/bin/bash
+set +x
+set -e
+
 git clone https://github.com/PaddlePaddle/Paddle-Inference-Demo.git --depth=1
 cd Paddle-Inference-Demo/python/cpu/
 cd resnet50
