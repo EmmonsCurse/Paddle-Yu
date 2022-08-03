@@ -1,9 +1,10 @@
 #!/bin/bash
+set +x
+set -e 
 pwd
 
 git clone https://github.com/PaddlePaddle/Paddle-Inference-Demo.git --depth=1
-cd Paddle-Inference-Demo/python/cpu/
-cd resnet50
+cd Paddle-Inference-Demo/python/cpu/resnet50
 
 # demo 1: cpu-resnet50 单输入模型 oneDNN/OnnxRuntime 预测样例
 if [ ! -d resnet50 ]; then
@@ -562,6 +563,3 @@ cd ../../mixed/LIC2020/
 sed -i "s/TensorRT-7.1.3.4/TensorRT-8.0.3.4/" compile.sh
 
 sed -i "s#${work_path}/../lib/#${work_path}/../../lib/#" compile.sh && sh run.sh
-
-
-
