@@ -26,31 +26,31 @@ mkdir pretrained
 mkdir inference_model
 
 # ResNet50_vd
-wget --no-proxy -P -q pretrained/ https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/legendary_models/ResNet50_vd_pretrained.pdparams
+wget --no-proxy -P pretrained/ https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/legendary_models/ResNet50_vd_pretrained.pdparams
 python tools/export_model.py -c ppcls/configs/ImageNet/ResNet/ResNet50_vd.yaml -o Global.pretrained_model=./pretrained/ResNet50_vd_pretrained -o Global.save_inference_dir=./inference_model/ResNet50_vd
 
 # GhostNet_x1_0
-wget --no-proxy -P -q pretrained/ https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/GhostNet_x1_0_pretrained.pdparams
+wget --no-proxy -P pretrained/ https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/GhostNet_x1_0_pretrained.pdparams
 python tools/export_model.py -c ppcls/configs/ImageNet/GhostNet/GhostNet_x1_0.yaml -o Global.pretrained_model=./pretrained/GhostNet_x1_0_pretrained -o Global.save_inference_dir=./inference_model/GhostNet_x1_0
 
 # DenseNet121
-wget --no-proxy -P -q pretrained/ https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/DenseNet121_pretrained.pdparams
+wget --no-proxy -P pretrained/ https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/DenseNet121_pretrained.pdparams
 python tools/export_model.py -c ppcls/configs/ImageNet/DenseNet/DenseNet121.yaml -o Global.pretrained_model=./pretrained/DenseNet121_pretrained -o Global.save_inference_dir=./inference_model/DenseNet121
 
 # HRNet_W32_C
-wget --no-proxy -P -q pretrained/ https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/legendary_models/HRNet_W32_C_pretrained.pdparams
+wget --no-proxy -P pretrained/ https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/legendary_models/HRNet_W32_C_pretrained.pdparams
 python tools/export_model.py -c ppcls/configs/ImageNet/HRNet/HRNet_W32_C.yaml -o Global.pretrained_model=./pretrained/HRNet_W32_C_pretrained -o Global.save_inference_dir=./inference_model/HRNet_W32_C
 
 # InceptionV4
-wget --no-proxy -P -q pretrained/ https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/InceptionV4_pretrained.pdparams
+wget --no-proxy -P pretrained/ https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/InceptionV4_pretrained.pdparams
 python tools/export_model.py -c ppcls/configs/ImageNet/Inception/InceptionV4.yaml -o Global.pretrained_model=./pretrained/InceptionV4_pretrained -o Global.save_inference_dir=./inference_model/InceptionV4
 
 # ViT_base_patch16_224
-wget --no-proxy -P -q pretrained/ https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/ViT_base_patch16_224_pretrained.pdparams
+wget --no-proxy -P pretrained/ https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/ViT_base_patch16_224_pretrained.pdparams
 python tools/export_model.py -c ppcls/configs/ImageNet/VisionTransformer/ViT_base_patch16_224.yaml -o Global.pretrained_model=./pretrained/ViT_base_patch16_224_pretrained -o Global.save_inference_dir=./inference_model/ViT_base_patch16_224
 
 # DeiT_base_patch16_224
-wget --no-proxy -P -q pretrained/ https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/DeiT_base_patch16_224_pretrained.pdparams
+wget --no-proxy -P pretrained/ https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/DeiT_base_patch16_224_pretrained.pdparams
 python tools/export_model.py -c ppcls/configs/ImageNet/DeiT/DeiT_base_patch16_224.yaml -o Global.pretrained_model=./pretrained/DeiT_base_patch16_224_pretrained -o Global.save_inference_dir=./inference_model/DeiT_base_patch16_224
 
 # 复制推理模型
@@ -129,19 +129,19 @@ mkdir pretrained
 mkdir inference_model
 
 # faster_rcnn_r50_fpn_1x_coco
-wget --no-proxy -P -q pretrained/ https://paddledet.bj.bcebos.com/models/faster_rcnn_r50_fpn_1x_coco.pdparams
+wget --no-proxy -P pretrained/ https://paddledet.bj.bcebos.com/models/faster_rcnn_r50_fpn_1x_coco.pdparams
 python tools/export_model.py -c configs/faster_rcnn/faster_rcnn_r50_fpn_1x_coco.yml --output_dir=./inference_model/ -o weights=pretrained/faster_rcnn_r50_fpn_1x_coco.pdparams
 
 # mask_rcnn_r50_vd_fpn_2x_coco
-wget --no-proxy -P -q pretrained/ https://paddledet.bj.bcebos.com/models/mask_rcnn_r50_vd_fpn_2x_coco.pdparams
+wget --no-proxy -P pretrained/ https://paddledet.bj.bcebos.com/models/mask_rcnn_r50_vd_fpn_2x_coco.pdparams
 python tools/export_model.py -c configs/mask_rcnn/mask_rcnn_r50_vd_fpn_2x_coco.yml --output_dir=./inference_model/ -o weights=pretrained/mask_rcnn_r50_vd_fpn_2x_coco.pdparams
 
 # yolov3_darknet53_270e_coco
-wget --no-proxy -P -q pretrained/ https://paddledet.bj.bcebos.com/models/yolov3_darknet53_270e_coco.pdparams
+wget --no-proxy -P pretrained/ https://paddledet.bj.bcebos.com/models/yolov3_darknet53_270e_coco.pdparams
 python tools/export_model.py -c configs/yolov3/yolov3_darknet53_270e_coco.yml --output_dir=./inference_model/ -o weights=pretrained/yolov3_darknet53_270e_coco.pdparams
 
 # ssd_mobilenet_v1_300_120e_voc
-wget --no-proxy -P -q pretrained/ https://paddledet.bj.bcebos.com/models/ssd_mobilenet_v1_300_120e_voc.pdparams
+wget --no-proxy -P pretrained/ https://paddledet.bj.bcebos.com/models/ssd_mobilenet_v1_300_120e_voc.pdparams
 python tools/export_model.py -c configs/ssd/ssd_mobilenet_v1_300_120e_voc.yml --output_dir=./inference_model/ -o weights=pretrained/ssd_mobilenet_v1_300_120e_voc.pdparams
 
 cp -r ./inference_model/* ../inference_model/
