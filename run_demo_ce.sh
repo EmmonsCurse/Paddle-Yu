@@ -212,7 +212,7 @@ echo "C++ Inference demo:"
 # 下载预测库
 cd ../../../c++/lib/
 
-wget -q https://paddle-inference-lib.bj.bcebos.com/2.3.2/cxx_c/Linux/GPU/x86-64_gcc8.2_avx_mkl_cuda11.2_cudnn8.2.1_trt8.0.3.4/paddle_inference.tgz
+wget -q https://paddle-qa.bj.bcebos.com/paddle-pipeline/Develop-GpuAll-Centos-Gcc82-Cuda112-Cudnn82-Trt8034-Py38-Compile/latest/paddle_inference.tgz
 tar xzf paddle_inference.tgz
 
 # demo 1 cpu-resnet50
@@ -568,12 +568,14 @@ cd ../gpu_fp16 && sed -i "s/TensorRT-7.1.3.4/TensorRT-8.0.3.4/" compile.sh && sh
 # demo 8 gpu-multi_stream
 # 运行 GPU 多流预测样例 
 # 该功能 develop 和 2.4 后可用
-# cd ../multi_stream && sed -i "s/TensorRT-7.1.3.4/TensorRT-8.0.3.4/" compile.sh && sh run.sh
+cd ../multi_stream && sed -i "s/TensorRT-7.1.3.4/TensorRT-8.0.3.4/" compile.sh && sh run.sh
 
+# Batch Stream 测试
+cd ../experimental/batch_stream/ && sed -i "s/TensorRT-7.1.3.4/TensorRT-8.0.3.4/" compile.sh && sh run.sh
 
 # demo 9 advanced-custom_operator
 # 自定义算子模型构建运行示例
-cd ../../advanced/custom-operator/ && sed -i "s/WITH_ONNXRUNTIME=ON/WITH_ONNXRUNTIME=OFF/" compile.sh && sed -i "s/TensorRT-7.1.3.4/TensorRT-8.0.3.4/" compile.sh && sh run.sh
+cd ../../../advanced/custom-operator/ && sed -i "s/WITH_ONNXRUNTIME=ON/WITH_ONNXRUNTIME=OFF/" compile.sh && sed -i "s/TensorRT-7.1.3.4/TensorRT-8.0.3.4/" compile.sh && sh run.sh
 
 
 # demo 10 advanced-share_external_data
