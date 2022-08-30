@@ -184,17 +184,17 @@ sh compile.sh clas
 # 离线tune测试
 ./build/clas --model_file inference_model/ViT_base_patch16_224/inference.pdmodel --params_file inference_model/ViT_base_patch16_224/inference.pdiparams --hs="224" --ws="224" --tune
 # 动态shape及序列化测试（注意：目前需要config加配置：config->Exp_DisableTensorRtOPs({"elementwise_add"});）
-./build/clas --model_file inference_model/ViT_base_patch16_224/inference.pdmodel --params_file inference_model/ViT_base_patch16_224/inference.pdiparams --hs="224" --ws="224"--no_seen_hs="224" --no_seen_ws="224" --tuned_dynamic_shape --serialize
+#./build/clas --model_file inference_model/ViT_base_patch16_224/inference.pdmodel --params_file inference_model/ViT_base_patch16_224/inference.pdiparams --hs="224" --ws="224"--no_seen_hs="224" --no_seen_ws="224" --tuned_dynamic_shape --serialize
 # 动态shape及反序列化测试（注意：目前需要config加配置：config->Exp_DisableTensorRtOPs({"elementwise_add"});）
-./build/clas --model_file inference_model/ViT_base_patch16_224/inference.pdmodel --params_file inference_model/ViT_base_patch16_224/inference.pdiparams --hs="224" --ws="224"--no_seen_hs="224" --no_seen_ws="224" --tuned_dynamic_shape --serialize
+#./build/clas --model_file inference_model/ViT_base_patch16_224/inference.pdmodel --params_file inference_model/ViT_base_patch16_224/inference.pdiparams --hs="224" --ws="224"--no_seen_hs="224" --no_seen_ws="224" --tuned_dynamic_shape --serialize
 
 # DeiT_base_patch16_224
 # 离线tune测试
 ./build/clas --model_file inference_model/DeiT_base_patch16_224/inference.pdmodel --params_file inference_model/DeiT_base_patch16_224/inference.pdiparams --hs="224" --ws="224" --tune
 # 动态shape及序列化测试（注意：目前需要config加配置：config->Exp_DisableTensorRtOPs({"elementwise_add"});）
-./build/clas --model_file inference_model/DeiT_base_patch16_224/inference.pdmodel --params_file inference_model/DeiT_base_patch16_224/inference.pdiparams --hs="224" --ws="224"--no_seen_hs="224" --no_seen_ws="224" --tuned_dynamic_shape --serialize
+#./build/clas --model_file inference_model/DeiT_base_patch16_224/inference.pdmodel --params_file inference_model/DeiT_base_patch16_224/inference.pdiparams --hs="224" --ws="224"--no_seen_hs="224" --no_seen_ws="224" --tuned_dynamic_shape --serialize
 # 动态shape及反序列化测试（注意：目前需要config加配置：config->Exp_DisableTensorRtOPs({"elementwise_add"});）
-./build/clas --model_file inference_model/DeiT_base_patch16_224/inference.pdmodel --params_file inference_model/DeiT_base_patch16_224/inference.pdiparams --hs="224" --ws="224"--no_seen_hs="224" --no_seen_ws="224" --tuned_dynamic_shape --serialize
+#./build/clas --model_file inference_model/DeiT_base_patch16_224/inference.pdmodel --params_file inference_model/DeiT_base_patch16_224/inference.pdiparams --hs="224" --ws="224"--no_seen_hs="224" --no_seen_ws="224" --tuned_dynamic_shape --serialize
 
 
 # 获取 PaddleDetection 模型
@@ -259,9 +259,9 @@ sh compile.sh detect
 # 离线tune测试
 ./build/detect --model_file inference_model/faster_rcnn_r50_fpn_1x_coco/model.pdmodel --params_file inference_model/faster_rcnn_r50_fpn_1x_coco/model.pdiparams --hs="608" --ws="608" --tune
 # 动态shape及序列化测试（注意：目前需要config加配置：config->Exp_DisableTensorRtOPs({"roi_align", "elementwise_add"});）
-./build/detect --model_file inference_model/faster_rcnn_r50_fpn_1x_coco/model.pdmodel --params_file inference_model/faster_rcnn_r50_fpn_1x_coco/model.pdiparams --hs="608" --ws="608" --no_seen_hs="416" --no_seen_ws="416" --tuned_dynamic_shape --serialize
+#./build/detect --model_file inference_model/faster_rcnn_r50_fpn_1x_coco/model.pdmodel --params_file inference_model/faster_rcnn_r50_fpn_1x_coco/model.pdiparams --hs="608" --ws="608" --no_seen_hs="416" --no_seen_ws="416" --tuned_dynamic_shape --serialize
 # 动态shape及反序列化测试（注意：目前需要config加配置：config->Exp_DisableTensorRtOPs({"roi_align", "elementwise_add"});）
-./build/detect --model_file inference_model/faster_rcnn_r50_fpn_1x_coco/model.pdmodel --params_file inference_model/faster_rcnn_r50_fpn_1x_coco/model.pdiparams --hs="608" --ws="608" --no_seen_hs="416" --no_seen_ws="416" --tuned_dynamic_shape --serialize
+#./build/detect --model_file inference_model/faster_rcnn_r50_fpn_1x_coco/model.pdmodel --params_file inference_model/faster_rcnn_r50_fpn_1x_coco/model.pdiparams --hs="608" --ws="608" --no_seen_hs="416" --no_seen_ws="416" --tuned_dynamic_shape --serialize
 
 # mask_rcnn_r50_vd_fpn_2x_coco
 # 离线tune测试
@@ -337,30 +337,30 @@ sh compile.sh ernie
 # 离线tune测试
 ./build/ernie --model_dir nlp_inference_model/ernie_model_4 --tune
 # 动态shape及序列化测试
-./build/ernie --model_dir nlp_inference_model/ernie_model_4 --tuned_dynamic_shape --serialize
+#./build/ernie --model_dir nlp_inference_model/ernie_model_4 --tuned_dynamic_shape --serialize
 # 动态shape及反序列化测试
-./build/ernie --model_dir nlp_inference_model/ernie_model_4 --tuned_dynamic_shape --serialize
+#./build/ernie --model_dir nlp_inference_model/ernie_model_4 --tuned_dynamic_shape --serialize
 
 
 
 # demo 6 gpu-ernie-varlen
 cd ../ernie-varlen/ && sed -i "s#TENSORRT_ROOT=/root/work/nvidia/TensorRT-7.2.3.4.cuda-10.1.cudnn7.6-OSS7.2.1#TENSORRT_ROOT=/usr/local/TensorRT-8.0.3.4#" compile.sh
-sh compile.sh
+# sh compile.sh
 
 if [ ! -d ernie_model_4 ]; then
     wget -q http://paddle-inference-dist.bj.bcebos.com/tensorrt_test/ernie_model_4.tar.gz;
     tar xzf ernie_model_4.tar.gz;
 fi
 
-./build/ernie_varlen_test --model_dir=./ernie_model_4/
+# ./build/ernie_varlen_test --model_dir=./ernie_model_4/
 
 
 # demo 7 gpu-gpu_fp16
 # 使用原生 GPU 运行样例
-cd ../gpu_fp16 && sed -i "s/TensorRT-7.1.3.4/TensorRT-8.0.3.4/" compile.sh && sh run.sh
+# cd ../gpu_fp16 && sed -i "s/TensorRT-7.1.3.4/TensorRT-8.0.3.4/" compile.sh && sh run.sh
 
 # 使用 GPU 混合精度推理 运行样例
-./build/resnet50_gpu_fp16 --model_file resnet50/inference.pdmodel --params_file resnet50/inference.pdiparams --use_gpu_fp16=1
+#./build/resnet50_gpu_fp16 --model_file resnet50/inference.pdmodel --params_file resnet50/inference.pdiparams --use_gpu_fp16=1
 
 
 # demo 8 gpu-multi_stream
@@ -387,7 +387,7 @@ cd ../share_external_data/ && sed -i "s/TensorRT-7.1.3.4/TensorRT-8.0.3.4/" comp
 
 # demo 11 advanced-multi_thread
 # 运行多线程预测样例
-cd ../share_external_data/ && sed -i "s/TensorRT-7.1.3.4/TensorRT-8.0.3.4/" compile.sh && sh run.sh
+cd ../multi_thread/ && sed -i "s/TensorRT-7.1.3.4/TensorRT-8.0.3.4/" compile.sh && sh run.sh
 
 
 # demo 12 advanced
