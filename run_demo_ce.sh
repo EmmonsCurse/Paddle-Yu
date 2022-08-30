@@ -212,7 +212,7 @@ echo "C++ Inference demo:"
 # 下载预测库
 cd ../../../c++/lib/
 
-wget -q https://paddle-inference-lib.bj.bcebos.com/2.3.1/cxx_c/Linux/GPU/x86-64_gcc8.2_avx_mkl_cuda11.2_cudnn8.2.1_trt8.0.3.4/paddle_inference.tgz
+wget -q https://paddle-inference-lib.bj.bcebos.com/2.3.2/cxx_c/Linux/GPU/x86-64_gcc8.2_avx_mkl_cuda11.2_cudnn8.2.1_trt8.0.3.4/paddle_inference.tgz
 tar xzf paddle_inference.tgz
 
 # demo 1 cpu-resnet50
