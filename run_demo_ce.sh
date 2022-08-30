@@ -566,8 +566,9 @@ cd ../gpu_fp16 && sed -i "s/TensorRT-7.1.3.4/TensorRT-8.0.3.4/" compile.sh && sh
 
 
 # demo 8 gpu-multi_stream
-# 运行 GPU 多流预测样例
-cd ../multi_stream && sed -i "s/TensorRT-7.1.3.4/TensorRT-8.0.3.4/" compile.sh && sh run.sh
+# 运行 GPU 多流预测样例 
+# 该功能 develop 和 2.4 后可用
+# cd ../multi_stream && sed -i "s/TensorRT-7.1.3.4/TensorRT-8.0.3.4/" compile.sh && sh run.sh
 
 
 # demo 9 advanced-custom_operator
