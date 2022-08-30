@@ -10,6 +10,9 @@ cd Paddle-Inference-Demo/python/cpu/resnet50
 echo "Python Inference demo:"
 
 # demo 1: cpu-resnet50 单输入模型 oneDNN/OnnxRuntime 预测样例
+
+sed -i "s/is not/!=/" infer_resnet.py
+
 if [ ! -d resnet50 ]; then
     wget -q https://paddle-inference-dist.bj.bcebos.com/Paddle-Inference-Demo/resnet50.tgz
     tar xzf resnet50.tgz 
@@ -41,12 +44,14 @@ fi
 # 使用 oneDNN 运行样例
 python infer_yolov3.py --model_file=./yolov3_r50vd_dcn_270e_coco/model.pdmodel --params_file=./yolov3_r50vd_dcn_270e_coco/model.pdiparams
 
-# 使用 OnnxRuntime 预测样例
+# 使用 OnnxRuntime 预测样例 - error
 # python infer_yolov3.py --model_file=./yolov3_r50vd_dcn_270e_coco/model.pdmodel --params_file=./yolov3_r50vd_dcn_270e_coco/model.pdiparams --use_onnxruntime=1
 
 
 # demo 3: advanced-share_external_data 运行 share_external_data 运行案例
 cd ../../advanced/share_external_data/
+
+sed -i "s/is not/!=/" infer_share_external_data.py
 
 if [ ! -f ILSVRC2012_val_00000247.jpeg ]; then
     wget -q https://paddle-inference-dist.bj.bcebos.com/inference_demo/python/resnet50/ILSVRC2012_val_00000247.jpeg
@@ -57,6 +62,8 @@ python infer_share_external_data.py --model_file=../../cpu/resnet50/resnet50/inf
 
 # demo 4: advanced-multi_thread: 运行多线程运行样例
 cd ../multi_thread/
+
+sed -i "s/is not/!=/" threads_demo.py
 
 if [ ! -f ILSVRC2012_val_00000247.jpeg ]; then
     wget -q https://paddle-inference-dist.bj.bcebos.com/inference_demo/python/resnet50/ILSVRC2012_val_00000247.jpeg
@@ -70,9 +77,11 @@ cd ../custom_operator/
 python train_and_infer.py
 
 
-# demo 6: gpu-resnet50 单输入模型 原生gpu/gpu混合精度推理/Trt_fp32/Trt_fp16/Trt_int8/Trt_dynamic_shape 预测样例
+# demo 6: gpu-resnet50 单输入模型 原生 gpu/gpu 混合精度推理/Trt_fp32/Trt_fp16/Trt_int8/Trt_dynamic_shape 预测样例
 
 cd ../../gpu/resnet50/
+
+sed -i "s/is not/!=/" infer_resnet.py
 
 if [ ! -f ILSVRC2012_val_00000247.jpeg ]; then
     wget -q https://paddle-inference-dist.bj.bcebos.com/inference_demo/python/resnet50/ILSVRC2012_val_00000247.jpeg
@@ -82,7 +91,8 @@ fi
 python infer_resnet.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams
 
 # 使用GPU 混合精度推理 运行样例
-python infer_resnet.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --run_mode=gpu_fp16
+# develop 分支下 - error
+# python infer_resnet.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --run_mode=gpu_fp16
 
 # 使用 Trt Fp32 运行样例
 python infer_resnet.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --run_mode=trt_fp32
@@ -95,11 +105,11 @@ python infer_resnet.py --model_file=../../cpu/resnet50/resnet50/inference.pdmode
 
 python infer_resnet.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --run_mode=trt_int8
 
-# 使用 Try dynamic shape 运行样例
+# 使用 Try dynamic shape 运行样例 -error
 # python infer_resnet.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --run_mode=trt_fp32 --use_dynamic_shape=1
 
 
-# demo 7: gpu-yolov3 多输入模型 原生gpu/gpu混合精度推理/Trt_fp32/Trt_fp16/Trt_int8/Trt_dynamic_shape 预测样例
+# demo 7: gpu-yolov3 多输入模型 原生 gpu/gpu 混合精度推理/Trt_fp32/Trt_fp16/Trt_int8/Trt_dynamic_shape 预测样例
 cd ../yolov3/
 
 # download data
@@ -122,7 +132,7 @@ python infer_yolov3.py --model_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/
 python infer_yolov3.py --model_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdmodel --params_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdiparams --run_mode=trt_int8
 
 
-# demo 8: gpu-tuned_dynamic_shape Trt动态shape自动推导 预测样例 使用 Paddle-TRT TunedDynamicShape 能力
+# demo 8: gpu-tuned_dynamic_shape Trt 动态 shape 自动推导 预测样例 使用 Paddle-TRT TunedDynamicShape 能力
 cd ../tuned_dynamic_shape/
 
 # 首先需要针对业务数据进行离线 tune，来获取计算图中所有中间 tensor 的 shape 范围，并将其存储在 config 中配置的shape_range_info.pbtxt 文件中
@@ -133,7 +143,7 @@ python infer_tune.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel 
 python infer_tune.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --use_gpu=1 --use_trt 1 --tuned_dynamic_shape 1
 
 
-# demo 9: 基于ELMo的LAC分词预测样例
+# demo 9: 基于 ELMo 的 LAC 分词预测样例
 cd ../../mixed/ELMo/
 
 if [ ! -d elmo ]; then
@@ -231,7 +241,7 @@ sh run.sh
 # 使用 oneDNN 运行样例
 cd ../yolov3/ && sh run.sh
 
-# 使用 OnnxRuntime 运行样例 -error
+# 使用 OnnxRuntime 运行样例 -[ERROR] Cannot found attribute iou_aware in op: yolo_box
 # ./build/yolov3_test --model_file yolov3_r50vd_dcn_270e_coco/model.pdmodel --params_file yolov3_r50vd_dcn_270e_coco/model.pdiparams --use_ort=1
 
 
@@ -294,8 +304,9 @@ git clone https://github.com/PaddlePaddle/PaddleClas.git --depth=1
 cd PaddleClas
 
 # 安装环境依赖
-python setup.py build
-python setup.py install
+python -m pip install -r requirements.txt -i https://mirror.baidu.com/pypi/simple --trusted-host mirror.b+aidu.com
+# python setup.py build
+# python setup.py install
 
 mkdir pretrained
 mkdir inference_model
@@ -335,7 +346,7 @@ cd -
 # TunedDynamicShape 测试
 sh compile.sh clas
 
-# 注意以下CV类的测试case，不是真正的变长模型，对输入shape是有要求的，无法支持任意的输入shape
+# 注意以下 CV 类的测试 case，不是真正的变长模型，对输入 shape 是有要求的，无法支持任意的输入 shape
 
 # ResNet50_Vd
 # 离线tune测试
