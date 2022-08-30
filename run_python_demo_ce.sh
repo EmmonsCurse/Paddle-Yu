@@ -193,24 +193,7 @@ fi
 # run fp32 model
 python model_test.py --model_path=./lstm_fp32_model --data_path=./quant_lstm_input_data --use_analysis=False --num_threads=1
 
-# run ptq int8 model
-python model_test.py --model_path=./lstm_fp32_model --data_path=./quant_lstm_input_data --use_ptq=True --num_threads=1
-
-# save quant2 int8 model
-python save_quant_model.py --quant_model_path=./lstm_quant --int8_model_save_path=./quant_saved_model_int8
-
-# run quant2 int8 model
-python model_test.py --model_path=./quant_saved_model_int8 --data_path=./quant_lstm_input_data --use_analysis=True --num_threads=1
 
 # 4 thread
 # run fp32 model
 python model_test.py --model_path=./lstm_fp32_model --data_path=./quant_lstm_input_data --use_analysis=False --num_threads=4
-
-# run ptq int8 model
-python model_test.py --model_path=./lstm_fp32_model --data_path=./quant_lstm_input_data --use_ptq=True --num_threads=4
-
-# save quant2 int8 model
-python save_quant_model.py --quant_model_path=./lstm_quant --int8_model_save_path=./quant_saved_model_int8
-
-# run quant2 int8 model
-python model_test.py --model_path=./quant_saved_model_int8 --data_path=./quant_lstm_input_data --use_analysis=True --num_threads=4
