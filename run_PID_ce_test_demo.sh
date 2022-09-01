@@ -9,7 +9,7 @@ error=0
 demo=0
 case=0
 
-echo "============= The path of Paddle-Inference-Demo Test failed cases  =============" >> /workspace/Paddle-Yu/Paddle-Inference-Demo/result.txt
+echo "============= The path of Paddle-Inference-Demo Test failed cases  =============" >> /workspace/Paddle-Yu/Paddle-Inference-Demo/test_result.txt
 # 定义 error 计算方法 
 count_error() {
     if [ $? -ne 0 ]; then
@@ -794,4 +794,4 @@ echo "total demos: "${demo}
 echo "total cases: "${case}
 echo "total errors: "${error}
 
-exit ${bug}
+exit ${error}
