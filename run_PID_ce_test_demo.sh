@@ -773,7 +773,8 @@ cd ../share_external_data/ && sed -i "s/TensorRT-7.1.3.4/TensorRT-8.0.3.4/" comp
 count_error
 
 
-# demo 12 advanced
+# demo 12 advanced x86_gru_int8
+# 需要在 manylinux_cpu_avx_mkl_gcc82 预测库下
 demo=`expr ${demo} + 1`
 
 
