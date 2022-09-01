@@ -248,6 +248,7 @@ if [ ! -f save_quant_model.py ]; then
     wget -q https://raw.githubusercontent.com/PaddlePaddle/Paddle/develop/python/paddle/fluid/contrib/slim/tests/save_quant_model.py
 fi
 
+sed -i "s/python3/python/g" run.sh
 bash run.sh
 count_error
 
@@ -295,7 +296,7 @@ cd ../yolov3/ && sh run.sh
 count_error
 
 # 使用 OnnxRuntime 运行样例 -[ERROR] Cannot found attribute iou_aware in op: yolo_box
-# ./build/yolov3_test --model_file yolov3_r50vd_dcn_270e_coco/model.pdmodel --params_file yolov3_r50vd_dcn_270e_coco/model.pdiparams --use_ort=1
+./build/yolov3_test --model_file yolov3_r50vd_dcn_270e_coco/model.pdmodel --params_file yolov3_r50vd_dcn_270e_coco/model.pdiparams --use_ort=1
 count_error
 
 
@@ -711,6 +712,7 @@ demo=`expr ${demo} + 1`
 
 cd ../ernie-varlen/ && sed -i "s#TENSORRT_ROOT=/root/work/nvidia/TensorRT-7.2.3.4.cuda-10.1.cudnn7.6-OSS7.2.1#TENSORRT_ROOT=/usr/local/TensorRT-8.0.3.4#" compile.sh
 sh compile.sh
+count_error
 
 if [ ! -d ernie_model_4 ]; then
     wget -q http://paddle-inference-dist.bj.bcebos.com/tensorrt_test/ernie_model_4.tar.gz;
