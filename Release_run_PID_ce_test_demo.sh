@@ -796,4 +796,4 @@ echo "total errors: "${error}
 
 cat /workspace/Paddle-Yu/Paddle-Inference-Demo/test_result.txt
 
-exit ${bug}
+exit ${error}
