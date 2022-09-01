@@ -9,11 +9,12 @@ error=0
 demo=0
 case=0
 
+echo "============= The path of Paddle-Inference-Demo Test failed cases  =============" >> /workspace/Paddle-Yu/Paddle-Inference-Demo/result.txt
 # 定义 error 计算方法 
 count_error() {
     if [ $? -ne 0 ]; then
-        echo ${PWD} 
         error=`expr ${error} + 1`
+        echo ${PWD} >> /workspace/Paddle-Yu/Paddle-Inference-Demo/test_result.txt
     fi
     case=`expr ${case} + 1`
 }
@@ -118,8 +119,8 @@ python infer_resnet.py --model_file=../../cpu/resnet50/resnet50/inference.pdmode
 count_error
 
 # 使用 GPU 混合精度推理 运行样例
-# develop 分支下 - error
-# python infer_resnet.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --run_mode=gpu_fp16
+# develop 分支下 -error
+python infer_resnet.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --run_mode=gpu_fp16
 count_error
 
 # 使用 Trt Fp32 运行样例
@@ -171,6 +172,10 @@ count_error
 python infer_yolov3.py --model_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdmodel --params_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdiparams --run_mode=trt_int8
 count_error
 
+# 使用 Try dynamic shape 运行样例 -error
+python infer_yolov3.py --model_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdmodel --params_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdiparams --run_mode=trt_fp32 --use_dynamic_shape=1
+count_error
+
 
 # demo 8: gpu-tuned_dynamic_shape Trt 动态 shape 自动推导 预测样例 使用 Paddle-TRT TunedDynamicShape 能力
 demo=`expr ${demo} + 1`
@@ -211,6 +216,8 @@ count_error
 # demo 10: 口罩检测预测样例
 demo=`expr ${demo} + 1`
 cd ../mask_detection/
+
+python cam_video.py
 count_error
 
 # demo 11: LSTM INT8 prediction example on X86 Linux
@@ -240,6 +247,9 @@ fi
 if [ ! -f save_quant_model.py ]; then
     wget -q https://raw.githubusercontent.com/PaddlePaddle/Paddle/develop/python/paddle/fluid/contrib/slim/tests/save_quant_model.py
 fi
+
+bash run.sh
+count_error
 
 # 1 thread
 # run fp32 model
