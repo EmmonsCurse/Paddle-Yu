@@ -791,4 +791,6 @@ echo "total demos: "${demo}
 echo "total cases: "${case}
 echo "total errors: "${error}
 
+cat /workspace/Paddle-Yu/Paddle-Inference-Demo/test_result.txt
+
 exit 0
