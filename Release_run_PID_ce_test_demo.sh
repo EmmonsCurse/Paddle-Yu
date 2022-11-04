@@ -21,6 +21,7 @@ count_error() {
 
 echo "Python Inference demo:"
 
+echo "demo 1: cpu_resnet50:"
 # demo 1: cpu-resnet50 单输入模型 oneDNN/OnnxRuntime 预测样例
 demo=`expr ${demo} + 1`
 
@@ -35,14 +36,18 @@ if [ ! -f ILSVRC2012_val_00000247.jpeg ]; then
     wget -q https://paddle-inference-dist.bj.bcebos.com/inference_demo/python/resnet50/ILSVRC2012_val_00000247.jpeg
 fi
 
+echo "1.1 resnet50_mkldnn:"
 # 使用 oneDNN 运行样例
 python infer_resnet.py --model_file=./resnet50/inference.pdmodel --params_file=./resnet50/inference.pdiparams
 count_error
 
+echo "1.2 resnet50_onnxruntime:"
 # 使用 OnnxRuntime 预测样例
 python infer_resnet.py --model_file=./resnet50/inference.pdmodel --params_file=./resnet50/inference.pdiparams --use_onnxruntime=1
 count_error
 
+
+echo "demo 2: cpu_yolov3:"
 # demo 2: cpu-yolov3 多输入模型 oneDNN/OnnxRuntime 预测样例
 demo=`expr ${demo} + 1`
 
@@ -57,14 +62,18 @@ if [ ! -f kite.jpg ]; then
     wget -q https://paddle-inference-dist.bj.bcebos.com/inference_demo/images/kite.jpg
 fi
 
+echo "1.1 yolov3_mkldnn:"
 # 使用 oneDNN 运行样例
 python infer_yolov3.py --model_file=./yolov3_r50vd_dcn_270e_coco/model.pdmodel --params_file=./yolov3_r50vd_dcn_270e_coco/model.pdiparams
 count_error
 
+echo "1.2 yolov3_onnxruntime:"
 # 使用 OnnxRuntime 预测样例 - error
 python infer_yolov3.py --model_file=./yolov3_r50vd_dcn_270e_coco/model.pdmodel --params_file=./yolov3_r50vd_dcn_270e_coco/model.pdiparams --use_onnxruntime=1
 count_error
 
+
+echo "demo 3: advanced-share_external_data-resnet50:"
 # demo 3: advanced-share_external_data 运行 share_external_data 运行案例
 demo=`expr ${demo} + 1`
 
@@ -80,6 +89,7 @@ python infer_share_external_data.py --model_file=../../cpu/resnet50/resnet50/inf
 count_error
 
 
+echo "demo 4: advanced-multi_thread-resnet50:"
 # demo 4: advanced-multi_thread: 运行多线程运行样例
 demo=`expr ${demo} + 1`
 
@@ -95,6 +105,7 @@ python threads_demo.py --model_file=../../cpu/resnet50/resnet50/inference.pdmode
 count_error
 
 
+echo "demo 5: advanced-custom_operator-resnet50:"
 # demo 5: advanced-custom_operator 自定义算子执行
 demo=`expr ${demo} + 1`
 
@@ -103,6 +114,7 @@ python train_and_infer.py
 count_error
 
 
+echo "demo 6: gpu_resnet50:"
 # demo 6: gpu-resnet50 单输入模型 原生 gpu/gpu 混合精度推理/Trt_fp32/Trt_fp16/Trt_int8/Trt_dynamic_shape 预测样例
 demo=`expr ${demo} + 1`
 
@@ -114,23 +126,28 @@ if [ ! -f ILSVRC2012_val_00000247.jpeg ]; then
     wget -q https://paddle-inference-dist.bj.bcebos.com/inference_demo/python/resnet50/ILSVRC2012_val_00000247.jpeg
 fi
 
+echo "demo 6.1: gpu_resnet50_native:"
 # 使用原生 GPU 运行样例
 python infer_resnet.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams
 count_error
 
+echo "demo 6.2: gpu_resnet50_mix:"
 # 使用 GPU 混合精度推理 运行样例
 # develop 分支下 -error
 python infer_resnet.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --run_mode=gpu_fp16
 count_error
 
+echo "demo 6.3: fp32_resnet50:"
 # 使用 Trt Fp32 运行样例
 python infer_resnet.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --run_mode=trt_fp32
 count_error
 
+echo "demo 6.4: fp16_resnet50:"
 # 使用 Trt Fp16 运行样例
 python infer_resnet.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --run_mode=trt_fp16
 count_error
 
+echo "demo 6.5: int8_resnet50:"
 # 使用 Trt Int8 运行样例
 python infer_resnet.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --run_mode=trt_int8
 count_error
@@ -138,6 +155,7 @@ count_error
 python infer_resnet.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --run_mode=trt_int8
 count_error
 
+echo "demo 6.6: Try dynamic shape_resnet50:"
 # 使用 Try dynamic shape 运行样例 -error
 python infer_resnet.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --run_mode=trt_fp32 --use_dynamic_shape=1
 count_error
