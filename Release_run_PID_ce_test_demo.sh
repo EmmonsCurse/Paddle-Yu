@@ -161,6 +161,7 @@ python infer_resnet.py --model_file=../../cpu/resnet50/resnet50/inference.pdmode
 count_error
 
 
+echo "demo 7: gpu_yolov3:"
 # demo 7: gpu-yolov3 多输入模型 原生 gpu/gpu 混合精度推理/Trt_fp32/Trt_fp16/Trt_int8/Trt_dynamic_shape 预测样例
 demo=`expr ${demo} + 1`
 
@@ -195,6 +196,7 @@ python infer_yolov3.py --model_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/
 count_error
 
 
+echo "demo 8: gpu_tuned_dynamic_shape:"
 # demo 8: gpu-tuned_dynamic_shape Trt 动态 shape 自动推导 预测样例 使用 Paddle-TRT TunedDynamicShape 能力
 demo=`expr ${demo} + 1`
 
@@ -204,14 +206,17 @@ sed -i "s/is not/!=/" infer_tune.py
 
 # 首先需要针对业务数据进行离线 tune，来获取计算图中所有中间 tensor 的 shape 范围，并将其存储在 config 中配置的 shape_range_info.pbtxt 文件中
 
+echo "demo 8.1: gpu_tune:"
 python infer_tune.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --tune 1
 count_error
 
+echo "demo 8.2: gpu_tuned_dynamic_shape:"
 # 有了离线 tune 得到的 shape 范围信息后，您可以使用该文件自动对所有的 trt 子图设置其输入的 shape 范围。
 python infer_tune.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --use_gpu=1 --use_trt 1 --tuned_dynamic_shape 1
 count_error
 
 
+echo "demo 9: ELMo_LAC:"
 # demo 9: 基于 ELMo 的 LAC 分词预测样例
 demo=`expr ${demo} + 1`
 
@@ -231,12 +236,15 @@ python infer.py
 count_error
 
 
+echo "demo 10: mask_detection:"
 # demo 10: 口罩检测预测样例
 demo=`expr ${demo} + 1`
 cd ../mask_detection/
 
 python cam_video.py
 count_error
+
+
 
 # demo 11: LSTM INT8 prediction example on X86 Linux
 demo=`expr ${demo} + 1`
