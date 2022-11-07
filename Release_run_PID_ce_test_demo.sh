@@ -36,12 +36,12 @@ if [ ! -f ILSVRC2012_val_00000247.jpeg ]; then
     wget -q https://paddle-inference-dist.bj.bcebos.com/inference_demo/python/resnet50/ILSVRC2012_val_00000247.jpeg
 fi
 
-echo "1.1 resnet50_mkldnn:"
+echo "demo 1.1 resnet50_mkldnn:"
 # 使用 oneDNN 运行样例
 python infer_resnet.py --model_file=./resnet50/inference.pdmodel --params_file=./resnet50/inference.pdiparams
 count_error
 
-echo "1.2 resnet50_onnxruntime:"
+echo "demo 1.2 resnet50_onnxruntime:"
 # 使用 OnnxRuntime 预测样例
 python infer_resnet.py --model_file=./resnet50/inference.pdmodel --params_file=./resnet50/inference.pdiparams --use_onnxruntime=1
 count_error
@@ -62,12 +62,12 @@ if [ ! -f kite.jpg ]; then
     wget -q https://paddle-inference-dist.bj.bcebos.com/inference_demo/images/kite.jpg
 fi
 
-echo "1.1 yolov3_mkldnn:"
+echo "demo 2.1 yolov3_mkldnn:"
 # 使用 oneDNN 运行样例
 python infer_yolov3.py --model_file=./yolov3_r50vd_dcn_270e_coco/model.pdmodel --params_file=./yolov3_r50vd_dcn_270e_coco/model.pdiparams
 count_error
 
-echo "1.2 yolov3_onnxruntime:"
+echo "demo 2.2 yolov3_onnxruntime:"
 # 使用 OnnxRuntime 预测样例 - error
 python infer_yolov3.py --model_file=./yolov3_r50vd_dcn_270e_coco/model.pdmodel --params_file=./yolov3_r50vd_dcn_270e_coco/model.pdiparams --use_onnxruntime=1
 count_error
@@ -254,7 +254,7 @@ python cam_video.py
 count_error
 
 
-echo "demo 9: ELMo_LAC:"
+echo "demo 11: LSTM INT8:"
 # demo 11: LSTM INT8 prediction example on X86 Linux
 demo=`expr ${demo} + 1`
 
@@ -287,13 +287,13 @@ sed -i "s/python3/python/g" run.sh
 bash run.sh
 count_error
 
-echo "demo 9.1: ELMo_LAC_thread:"
+echo "demo 11.1: LSTM_INT8_thread:"
 # 1 thread
 # run fp32 model
 python model_test.py --model_path=./lstm_fp32_model --data_path=./quant_lstm_input_data --use_analysis=False --num_threads=1
 count_error
 
-echo "demo 9.1: ELMo_LAC_4_threads:"
+echo "demo 11.2: LSTM_INT8_4_threads:"
 # 4 thread
 # run fp32 model
 python model_test.py --model_path=./lstm_fp32_model --data_path=./quant_lstm_input_data --use_analysis=False --num_threads=4
