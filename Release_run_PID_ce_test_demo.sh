@@ -147,12 +147,12 @@ echo "demo 6.4: fp16_resnet50:"
 python infer_resnet.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --run_mode=trt_fp16
 count_error
 
-echo "demo 6.5: trt_int8_resnet50_generate:"
+echo "demo 6.5.1: trt_int8_resnet50_generate:"
 # 使用 Trt Int8 运行样例
 python infer_resnet.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --run_mode=trt_int8
 count_error
 
-echo "demo 6.5: trt_int8_resnet50_generate:"
+echo "demo 6.5.2: trt_int8_resnet50_generate:"
 python infer_resnet.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --run_mode=trt_int8
 count_error
 
@@ -190,16 +190,16 @@ python infer_yolov3.py --model_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/
 count_error
 
 
-echo "demo 7.4: trt_int8_yolov3_generate:"
+echo "demo 7.4.1: trt_int8_yolov3_generate:"
 # 使用 Trt Int8 运行样例
 python infer_yolov3.py --model_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdmodel --params_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdiparams --run_mode=trt_int8
 count_error
 
-echo "demo 7.4: trt_int8_yolov3:"
+echo "demo 7.4.2: trt_int8_yolov3:"
 python infer_yolov3.py --model_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdmodel --params_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdiparams --run_mode=trt_int8
 count_error
 
-echo "demo 7.4: trt_dynamic_shape_yolov3:"
+echo "demo 7.5: trt_dynamic_shape_yolov3:"
 # 使用 Try dynamic shape 运行样例 -error
 python infer_yolov3.py --model_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdmodel --params_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdiparams --run_mode=trt_fp32 --use_dynamic_shape=1
 count_error
@@ -363,18 +363,18 @@ echo "demo 3.3: fp16_resnet50:"
 ./build/resnet50_test --model_file resnet50/inference.pdmodel --params_file resnet50/inference.pdiparams --run_mode=trt_fp16
 count_error
 
-echo "demo 3.4: trt_int8_resnet50_generate:"
+echo "demo 3.4.1: trt_int8_resnet50_generate:"
 # 使用 TensorRT Int8 离线量化预测运行样例
 # 生成量化校准表
 ./build/resnet50_test --model_file resnet50/inference.pdmodel --params_file resnet50/inference.pdiparams --run_mode=trt_int8
 count_error
 
-echo "demo 3.5: trt_int8_resnet50:"
+echo "demo 3.4.2: trt_int8_resnet50:"
 # 加载校准表执行预测
 ./build/resnet50_test --model_file resnet50/inference.pdmodel --params_file resnet50/inference.pdiparams --run_mode=trt_int8 --use_calib=true
 count_error
 
-echo "demo 3.6: Slim_trt_int8_resnet50_quant:"
+echo "demo 3.5: Slim_trt_int8_resnet50_quant:"
 # 使用 TensorRT 加载 PaddleSlim Int8 量化模型预测
 # 模型下载 
 wget -q https://paddle-inference-dist.bj.bcebos.com/inference_demo/python/resnet50/ResNet50_quant.tar.gz
@@ -383,7 +383,7 @@ tar -zxvf ResNet50_quant.tar.gz
 ./build/resnet50_test --model_dir ResNet50_quant/ --run_mode=trt_int8 --use_calib=false
 count_error
 
-echo "demo 3.7: trt_idynamic_shape_resnet50:"
+echo "demo 3.6: trt_idynamic_shape_resnet50:"
 # 使用 TensorRT dynamic shape 运行样例（以 Fp32 为例）-error
 ./build/resnet50_test --model_file resnet50/inference.pdmodel --params_file resnet50/inference.pdiparams --run_mode=trt_fp32 --use_dynamic_shape=1
 count_error
@@ -408,18 +408,18 @@ echo "demo 4.3: fp16_yolov3:"
 ./build/yolov3_test --model_file yolov3_r50vd_dcn_270e_coco/model.pdmodel --params_file yolov3_r50vd_dcn_270e_coco/model.pdiparams --run_mode=trt_fp16
 count_error
 
-echo "demo 4.4: trt_int8_yolov3_generate:"
+echo "demo 4.4.1: trt_int8_yolov3_generate:"
 # 使用 TensorRT Int8 运行样例
 # 生成量化校准表
 ./build/yolov3_test --model_file yolov3_r50vd_dcn_270e_coco/model.pdmodel --params_file yolov3_r50vd_dcn_270e_coco/model.pdiparams --run_mode=trt_int8
 count_error
 
-echo "demo 4.5: trt_int8_yolov3:"
+echo "demo 4.4.2: trt_int8_yolov3:"
 # 加载校准表执行预测
 ./build/yolov3_test --model_file yolov3_r50vd_dcn_270e_coco/model.pdmodel --params_file yolov3_r50vd_dcn_270e_coco/model.pdiparams --run_mode=trt_int8
 count_error
 
-echo "demo 4.6: trt_dynamic_shape_yolov3:"
+echo "demo 4.5: trt_dynamic_shape_yolov3:"
 # 使用 TensorRT dynamic shape 运行样例（以 Fp32 为例）-error
 ./build/yolov3_test --model_file yolov3_r50vd_dcn_270e_coco/inference.pdmodel --params_file yolov3_r50vd_dcn_270e_coco/inference.pdiparams --run_mode=trt_fp32 --use_dynamic_shape=1
 count_error
@@ -481,82 +481,92 @@ sh compile.sh clas
 
 # 注意以下 CV 类的测试 case，不是真正的变长模型，对输入 shape 是有要求的，无法支持任意的输入 shape
 
-echo "demo 5.1: gpu-tuned_dynamic_shape_ResNet50_Vd"
+echo "demo 5.1.1: gpu-tuned_dynamic_shape_ResNet50_Vd 离线tune测试"
 # ResNet50_Vd
 # 离线tune测试
 ./build/clas --model_file inference_model/ResNet50_vd/inference.pdmodel  --params_file inference_model/ResNet50_vd/inference.pdiparams --hs="224:448" --ws="224:448" --tune
 count_error
 
+echo "demo 5.1.2: gpu-tuned_dynamic_shape_ResNet50_Vd 动态shape及序列化测试"
 # 动态shape及序列化测试
 ./build/clas --model_file inference_model/ResNet50_vd/inference.pdmodel  --params_file inference_model/ResNet50_vd/inference.pdiparams --hs="224:448" --ws="224:448" --no_seen_hs="112:672" --no_seen_ws="112:672" --tuned_dynamic_shape --serialize
 count_error
 
+echo "demo 5.1.3: gpu-tuned_dynamic_shape_ResNet50_Vd 动态shape及反序列化测试"
 # 动态shape及反序列化测试
 ./build/clas --model_file inference_model/ResNet50_vd/inference.pdmodel  --params_file inference_model/ResNet50_vd/inference.pdiparams --hs="224:448" --ws="224:448" --no_seen_hs="112:672" --no_seen_ws="112:672" --tuned_dynamic_shape --serialize
 count_error
 
 
-echo "demo 5.2: gpu-tuned_dynamic_shape_GhostNet_x1_0"
+echo "demo 5.2.1: gpu-tuned_dynamic_shape_GhostNet_x1_0 离线tune测试"
 # GhostNet_x1_0
 # 离线tune测试
 ./build/clas --model_file inference_model/GhostNet_x1_0/inference.pdmodel --params_file inference_model/GhostNet_x1_0/inference.pdiparams --hs="224:448" --ws="224:448" --tune
 count_error
 
+echo "demo 5.2.2: gpu-tuned_dynamic_shape_GhostNet_x1_0 动态shape及序列化测试"
 # 动态shape及序列化测试
 ./build/clas --model_file inference_model/GhostNet_x1_0/inference.pdmodel --params_file inference_model/GhostNet_x1_0/inference.pdiparams --hs="224:448" --ws="224:448" --no_seen_hs="112:672" --no_seen_ws="112:672" --tuned_dynamic_shape --serialize
 count_error
 
+echo "demo 5.2.3: gpu-tuned_dynamic_shape_GhostNet_x1_0 动态shape及反序列化测试"
 # 动态shape及反序列化测试
 ./build/clas --model_file inference_model/GhostNet_x1_0/inference.pdmodel --params_file inference_model/GhostNet_x1_0/inference.pdiparams --hs="224:448" --ws="224:448" --no_seen_hs="112:672" --no_seen_ws="112:672" --tuned_dynamic_shape --serialize
 count_error
 
 
-echo "demo 5.3: gpu-tuned_dynamic_shape_DenseNet121"
+echo "demo 5.3.1: gpu-tuned_dynamic_shape_DenseNet121 离线tune测试"
 # DenseNet121
 # 离线tune测试
 ./build/clas --model_file inference_model/DenseNet121/inference.pdmodel --params_file inference_model/DenseNet121/inference.pdiparams --hs="224:448" --ws="224:448" --tune
 count_error
 
+echo "demo 5.3.2: gpu-tuned_dynamic_shape_DenseNet121 动态shape及序列化测试"
 # 动态shape及序列化测试
 ./build/clas --model_file inference_model/DenseNet121/inference.pdmodel --params_file inference_model/DenseNet121/inference.pdiparams --hs="224:448" --ws="224:448" --no_seen_hs="112:672" --no_seen_ws="112:672" --tuned_dynamic_shape --serialize
 count_error
 
+echo "demo 5.3.3: gpu-tuned_dynamic_shape_DenseNet121 动态shape及序列化测试"
 # 动态shape及反序列化测试
 ./build/clas --model_file inference_model/DenseNet121/inference.pdmodel --params_file inference_model/DenseNet121/inference.pdiparams --hs="224:448" --ws="224:448" --no_seen_hs="112:672" --no_seen_ws="112:672" --tuned_dynamic_shape --serialize
 count_error
 
 
-echo "demo 5.4: gpu-tuned_dynamic_shape_HRNet_W32_C"
+echo "demo 5.4.1: gpu-tuned_dynamic_shape_HRNet_W32_C 离线tune测试"
 # HRNet_W32_C
 # 离线tune测试
 ./build/clas --model_file inference_model/HRNet_W32_C/inference.pdmodel --params_file inference_model/HRNet_W32_C/inference.pdiparams --hs="224" --ws="224" --tune
 count_error
 
+echo "demo 5.4.2: gpu-tuned_dynamic_shape_HRNet_W32_C 动态shape及序列化测试"
 # 动态shape及序列化测试
 ./build/clas --model_file inference_model/HRNet_W32_C/inference.pdmodel --params_file inference_model/HRNet_W32_C/inference.pdiparams --hs="224" --ws="224" --no_seen_hs="448" --no_seen_ws="448" --tuned_dynamic_shape --serialize
 count_error
 
+echo "demo 5.4.3: gpu-tuned_dynamic_shape_HRNet_W32_C 动态shape及反序列化测试"
 # 动态shape及反序列化测试
 ./build/clas --model_file inference_model/HRNet_W32_C/inference.pdmodel --params_file inference_model/HRNet_W32_C/inference.pdiparams --hs="224" --ws="224" --no_seen_hs="448" --no_seen_ws="448" --tuned_dynamic_shape --serialize
 count_error
 
 
-echo "demo 5.5: gpu-tuned_dynamic_shape_InceptionV4"
+echo "demo 5.5.1: gpu-tuned_dynamic_shape_InceptionV4 离线tune测试"
 # InceptionV4
 # 离线tune测试
 ./build/clas --model_file inference_model/InceptionV4/inference.pdmodel --params_file inference_model/InceptionV4/inference.pdiparams --hs="224" --ws="224" --tune
 count_error
 
+echo "demo 5.5.2: gpu-tuned_dynamic_shape_InceptionV4 动态shape及序列化测试"
 # 动态shape及序列化测试
 ./build/clas --model_file inference_model/InceptionV4/inference.pdmodel --params_file inference_model/InceptionV4/inference.pdiparams --hs="224" --ws="224" --no_seen_hs="448" --no_seen_ws="448" --tuned_dynamic_shape --serialize
 count_error
 
+echo "demo 5.5.3: gpu-tuned_dynamic_shape_InceptionV4 动态shape及反序列化测试"
 # 动态shape及反序列化测试
 ./build/clas --model_file inference_model/InceptionV4/inference.pdmodel --params_file inference_model/InceptionV4/inference.pdiparams --hs="224" --ws="224" --no_seen_hs="448" --no_seen_ws="448" --tuned_dynamic_shape --serialize
 count_error
 
 
-echo "demo 5.6: gpu-tuned_dynamic_shape_ViT_base_patch16_224"
+echo "demo 5.6.1: gpu-tuned_dynamic_shape_ViT_base_patch16_224 离线tune测试"
 # ViT_base_patch16_224
 
 # config 加配置
@@ -567,25 +577,29 @@ sh compile.sh clas
 ./build/clas --model_file inference_model/ViT_base_patch16_224/inference.pdmodel --params_file inference_model/ViT_base_patch16_224/inference.pdiparams --hs="224" --ws="224" --tune
 count_error
 
+echo "demo 5.6.2: gpu-tuned_dynamic_shape_ViT_base_patch16_224 动态shape及序列化测试"
 # 动态shape及序列化测试（注意：目前需要config加配置：config->Exp_DisableTensorRtOPs({"elementwise_add"});）
 ./build/clas --model_file inference_model/ViT_base_patch16_224/inference.pdmodel --params_file inference_model/ViT_base_patch16_224/inference.pdiparams --hs="224" --ws="224"--no_seen_hs="224" --no_seen_ws="224" --tuned_dynamic_shape --serialize
 count_error
 
+echo "demo 5.6.3: gpu-tuned_dynamic_shape_ViT_base_patch16_224 动态shape及反序列化测试"
 # 动态shape及反序列化测试（注意：目前需要config加配置：config->Exp_DisableTensorRtOPs({"elementwise_add"});）
 ./build/clas --model_file inference_model/ViT_base_patch16_224/inference.pdmodel --params_file inference_model/ViT_base_patch16_224/inference.pdiparams --hs="224" --ws="224"--no_seen_hs="224" --no_seen_ws="224" --tuned_dynamic_shape --serialize
 count_error
 
 
-echo "demo 5.6: gpu-tuned_dynamic_shape_DeiT_base_patch16_224"
+echo "demo 5.7.1: gpu-tuned_dynamic_shape_DeiT_base_patch16_224 离线tune测试"
 # DeiT_base_patch16_224
 # 离线tune测试
 ./build/clas --model_file inference_model/DeiT_base_patch16_224/inference.pdmodel --params_file inference_model/DeiT_base_patch16_224/inference.pdiparams --hs="224" --ws="224" --tune
 count_error
 
+echo "demo 5.7.2: gpu-tuned_dynamic_shape_DeiT_base_patch16_224 动态shape及序列化测试"
 # 动态shape及序列化测试（注意：目前需要config加配置：config->Exp_DisableTensorRtOPs({"elementwise_add"});）
 ./build/clas --model_file inference_model/DeiT_base_patch16_224/inference.pdmodel --params_file inference_model/DeiT_base_patch16_224/inference.pdiparams --hs="224" --ws="224"--no_seen_hs="224" --no_seen_ws="224" --tuned_dynamic_shape --serialize
 count_error
 
+echo "demo 5.7.3: gpu-tuned_dynamic_shape_DeiT_base_patch16_224 动态shape及反序列化测试"
 # 动态shape及反序列化测试（注意：目前需要config加配置：config->Exp_DisableTensorRtOPs({"elementwise_add"});）
 ./build/clas --model_file inference_model/DeiT_base_patch16_224/inference.pdmodel --params_file inference_model/DeiT_base_patch16_224/inference.pdiparams --hs="224" --ws="224"--no_seen_hs="224" --no_seen_ws="224" --tuned_dynamic_shape --serialize
 count_error
@@ -625,16 +639,20 @@ cd -
 
 sh compile.sh detect
 
-echo "demo 5.7: gpu-tuned_dynamic_shape_yolov3_darknet53_270e_coco"
+echo "demo 5.8.1: gpu-tuned_dynamic_shape_yolov3_darknet53_270e_coco 离线tune测试"
 # yolov3_darknet53_270e_coco
 # 离线tune测试
 ./build/detect --model_file inference_model/yolov3_darknet53_270e_coco/model.pdmodel --params_file inference_model/yolov3_darknet53_270e_coco/model.pdiparams --hs="608" --ws="608" --tune
 count_error
 
+
+echo "demo 5.8.2: gpu-tuned_dynamic_shape_yolov3_darknet53_270e_coco 动态shape及序列化测试"
 # 动态shape及序列化测试
 ./build/detect --model_file inference_model/yolov3_darknet53_270e_coco/model.pdmodel --params_file inference_model/yolov3_darknet53_270e_coco/model.pdiparams --hs="608" --ws="608" --no_seen_hs="416" --no_seen_ws="416" --tuned_dynamic_shape --serialize
 count_error
 
+
+echo "demo 5.8.3: gpu-tuned_dynamic_shape_yolov3_darknet53_270e_coco 动态shape及反序列化测试"
 # 动态shape及反序列化测试
 ./build/detect --model_file inference_model/yolov3_darknet53_270e_coco/model.pdmodel --params_file inference_model/yolov3_darknet53_270e_coco/model.pdiparams --hs="608" --ws="608" --no_seen_hs="416" --no_seen_ws="416" --tuned_dynamic_shape --serialize
 count_error
@@ -643,16 +661,18 @@ count_error
 sed -i "75s#// config#config#g" detect.cc
 sh compile.sh detect
 
-echo "demo 5.8: gpu-tuned_dynamic_shape_ssd_mobilenet_v1_300_120e_voc"
+echo "demo 5.9.1: gpu-tuned_dynamic_shape_ssd_mobilenet_v1_300_120e_voc 离线tune测试"
 # ssd_mobilenet_v1_300_120e_voc
 # 离线tune测试
 ./build/detect --model_file inference_model/ssd_mobilenet_v1_300_120e_voc//model.pdmodel --params_file inference_model/ssd_mobilenet_v1_300_120e_voc//model.pdiparams --hs="300" --ws="300" --tune
 count_error
 
+echo "demo 5.9.2: gpu-tuned_dynamic_shape_ssd_mobilenet_v1_300_120e_voc 动态shape及序列化测试"
 # 动态shape及序列化测试（注意：目前需要config加配置：config->Exp_DisableTensorRtOPs({"elementwise_add"});）
 ./build/detect --model_file inference_model/ssd_mobilenet_v1_300_120e_voc//model.pdmodel --params_file inference_model/ssd_mobilenet_v1_300_120e_voc//model.pdiparams --hs="300" --ws="300" --no_seen_hs="416" --no_seen_ws="416" --tuned_dynamic_shape --serialize
 count_error
 
+echo "demo 5.9.3: gpu-tuned_dynamic_shape_ssd_mobilenet_v1_300_120e_voc 动态shape及反序列化测试"
 # 动态shape及反序列化测试（注意：目前需要config加配置：config->Exp_DisableTensorRtOPs({"elementwise_add"});）
 ./build/detect --model_file inference_model/ssd_mobilenet_v1_300_120e_voc//model.pdmodel --params_file inference_model/ssd_mobilenet_v1_300_120e_voc//model.pdiparams --hs="300" --ws="300" --no_seen_hs="416" --no_seen_ws="416" --tuned_dynamic_shape --serialize
 count_error
@@ -660,31 +680,35 @@ count_error
 # 修改
 # sed -i "s#"roi_align"#"roi_align\",\"elementwise_add"#" detect.cc
 
-echo "demo 5.9: gpu-tuned_dynamic_shape_faster_rcnn_r50_fpn_1x_coco"
+echo "demo 5.10.1: gpu-tuned_dynamic_shape_faster_rcnn_r50_fpn_1x_coco 离线tune测试"
 # faster_rcnn_r50_fpn_1x_coco
 # 离线tune测试
 ./build/detect --model_file inference_model/faster_rcnn_r50_fpn_1x_coco/model.pdmodel --params_file inference_model/faster_rcnn_r50_fpn_1x_coco/model.pdiparams --hs="608" --ws="608" --tune
 count_error
 
+echo "demo 5.10.2: gpu-tuned_dynamic_shape_faster_rcnn_r50_fpn_1x_coco 动态shape及序列化测试"
 # 动态shape及序列化测试（注意：目前需要config加配置：config->Exp_DisableTensorRtOPs({"roi_align", "elementwise_add"});）
 ./build/detect --model_file inference_model/faster_rcnn_r50_fpn_1x_coco/model.pdmodel --params_file inference_model/faster_rcnn_r50_fpn_1x_coco/model.pdiparams --hs="608" --ws="608" --no_seen_hs="416" --no_seen_ws="416" --tuned_dynamic_shape --serialize
 count_error
 
+echo "demo 5.10.3: gpu-tuned_dynamic_shape_faster_rcnn_r50_fpn_1x_coco 动态shape及反序列化测试"
 # 动态shape及反序列化测试（注意：目前需要config加配置：config->Exp_DisableTensorRtOPs({"roi_align", "elementwise_add"});）
 ./build/detect --model_file inference_model/faster_rcnn_r50_fpn_1x_coco/model.pdmodel --params_file inference_model/faster_rcnn_r50_fpn_1x_coco/model.pdiparams --hs="608" --ws="608" --no_seen_hs="416" --no_seen_ws="416" --tuned_dynamic_shape --serialize
 count_error
 
 
-echo "demo 5.9: gpu-tuned_dynamic_shape_mask_rcnn_r50_vd_fpn_2x_coco"
+echo "demo 5.11.1: gpu-tuned_dynamic_shape_mask_rcnn_r50_vd_fpn_2x_coco 离线tune测试"
 # mask_rcnn_r50_vd_fpn_2x_coco
 # 离线tune测试
 ./build/detect --model_file inference_model/mask_rcnn_r50_vd_fpn_2x_coco/model.pdmodel --params_file inference_model/mask_rcnn_r50_vd_fpn_2x_coco/model.pdiparams --hs="608" --ws="608" --tune
 count_error
 
+echo "demo 5.11.2: gpu-tuned_dynamic_shape_mask_rcnn_r50_vd_fpn_2x_coco 动态shape及序列化测试"
 # 动态shape及序列化测试（注意：目前需要config加配置：config->Exp_DisableTensorRtOPs({"roi_align", "elementwise_add"});）
 ./build/detect --model_file inference_model/mask_rcnn_r50_vd_fpn_2x_coco/model.pdmodel --params_file inference_model/mask_rcnn_r50_vd_fpn_2x_coco/model.pdiparams --hs="608" --ws="608" --no_seen_hs="416" --no_seen_ws="416" --tuned_dynamic_shape --serialize
 count_error
 
+echo "demo 5.11.3: gpu-tuned_dynamic_shape_mask_rcnn_r50_vd_fpn_2x_coco 动态shape及反序列化测试"
 # 动态shape及反序列化测试（注意：目前需要config加配置：config->Exp_DisableTensorRtOPs({"roi_align", "elementwise_add"});）
 ./build/detect --model_file inference_model/mask_rcnn_r50_vd_fpn_2x_coco/model.pdmodel --params_file inference_model/mask_rcnn_r50_vd_fpn_2x_coco/model.pdiparams --hs="608" --ws="608" --no_seen_hs="416" --no_seen_ws="416" --tuned_dynamic_shape --serialize
 count_error
@@ -713,15 +737,17 @@ cd -
 # ocr det模型测试
 sh compile.sh ocr_det
 
-echo "demo 5.10: gpu-tuned_dynamic_shape_ch_ppocr_server_v2.0_det_infer"
+echo "demo 5.12.1: gpu-tuned_dynamic_shape_ch_ppocr_server_v2.0_det_infer 离线tune测试"
 # 离线tune测试
 ./build/ocr_det --model_file ocr_inference_model/ch_ppocr_server_v2.0_det_infer/inference.pdmodel --params_file ocr_inference_model/ch_ppocr_server_v2.0_det_infer/inference.pdiparams --hs="640" --ws="640" --tune
 count_error
 
+echo "demo 5.12.2: gpu-tuned_dynamic_shape_ch_ppocr_server_v2.0_det_infer 动态shape及序列化测试"
 # 动态shape及序列化测试
 ./build/ocr_det --model_file ocr_inference_model/ch_ppocr_server_v2.0_det_infer/inference.pdmodel --params_file ocr_inference_model/ch_ppocr_server_v2.0_det_infer/inference.pdiparams --hs="640" --ws="640" --no_seen_hs="320" --no_seen_ws="320" --tuned_dynamic_shape --serialize
 count_error
 
+echo "demo 5.12.3: gpu-tuned_dynamic_shape_ch_ppocr_server_v2.0_det_infer 动态shape及反序列化测试"
 # 动态shape及反序列化测试
 ./build/ocr_det --model_file ocr_inference_model/ch_ppocr_server_v2.0_det_infer/inference.pdmodel --params_file ocr_inference_model/ch_ppocr_server_v2.0_det_infer/inference.pdiparams --hs="640" --ws="640" --no_seen_hs="320" --no_seen_ws="320" --tuned_dynamic_shape --serialize
 count_error
@@ -729,15 +755,17 @@ count_error
 # ocr cls模型测试
 sh compile.sh ocr_cls
 
-echo "demo 5.11: gpu-tuned_dynamic_shape_ch_ppocr_mobile_v2.0_cls_infer"
+echo "demo 5.13.1: gpu-tuned_dynamic_shape_ch_ppocr_mobile_v2.0_cls_infer 离线tune测试"
 # 离线tune测试
 ./build/ocr_cls --model_file ocr_inference_model/ch_ppocr_mobile_v2.0_cls_infer/inference.pdmodel --params_file ocr_inference_model/ch_ppocr_mobile_v2.0_cls_infer/inference.pdiparams --hs="640" --ws="640" --tune
 count_error
 
+echo "demo 5.13.2: gpu-tuned_dynamic_shape_ch_ppocr_mobile_v2.0_cls_infer 动态shape及序列化测试"
 # 动态shape及序列化测试
 ./build/ocr_cls --model_file ocr_inference_model/ch_ppocr_mobile_v2.0_cls_infer/inference.pdmodel --params_file ocr_inference_model/ch_ppocr_mobile_v2.0_cls_infer/inference.pdiparams --hs="640" --ws="640" --no_seen_hs="320" --no_seen_ws="320" --tuned_dynamic_shape --serialize
 count_error
 
+echo "demo 5.13.3: gpu-tuned_dynamic_shape_ch_ppocr_mobile_v2.0_cls_infer 动态shape及反序列化测试"
 # 动态shape及反序列化测试
 ./build/ocr_cls --model_file ocr_inference_model/ch_ppocr_mobile_v2.0_cls_infer/inference.pdmodel --params_file ocr_inference_model/ch_ppocr_mobile_v2.0_cls_infer/inference.pdiparams --hs="640" --ws="640" --no_seen_hs="320" --no_seen_ws="320" --tuned_dynamic_shape --serialize
 count_error
@@ -746,15 +774,18 @@ count_error
 # ocr rec模型测试
 sh compile.sh ocr_rec
 
-echo "demo 5.12: gpu-tuned_dynamic_shape_ch_ppocr_mobile_v2.0_rec_infer"
+echo "demo 5.14.1: gpu-tuned_dynamic_shape_ch_ppocr_mobile_v2.0_rec_infer 离线tune测试"
 # 离线tune测试
 ./build/ocr_rec --model_file ocr_inference_model/ch_ppocr_server_v2.0_rec_infer/inference.pdmodel --params_file ocr_inference_model/ch_ppocr_server_v2.0_rec_infer/inference.pdiparams --hs="32" --ws="32" --tune
 count_error
 
+echo "demo 5.14.2: gpu-tuned_dynamic_shape_ch_ppocr_mobile_v2.0_rec_infer 动态shape及序列化测试"
 # 动态shape及序列化测试
 ./build/ocr_rec --model_file ocr_inference_model/ch_ppocr_server_v2.0_rec_infer/inference.pdmodel --params_file ocr_inference_model/ch_ppocr_server_v2.0_rec_infer/inference.pdiparams --hs="32" --ws="32" --no_seen_hs="32" --no_seen_ws="320" --tuned_dynamic_shape --serialize
 count_error
 
+
+echo "demo 5.14.3: gpu-tuned_dynamic_shape_ch_ppocr_mobile_v2.0_rec_infer 动态shape及反序列化测试"
 # 动态shape及反序列化测试
 ./build/ocr_rec --model_file ocr_inference_model/ch_ppocr_server_v2.0_rec_infer/inference.pdmodel --params_file ocr_inference_model/ch_ppocr_server_v2.0_rec_infer/inference.pdiparams --hs="32" --ws="32" --no_seen_hs="32" --no_seen_ws="320" --tuned_dynamic_shape --serialize
 count_error
@@ -768,15 +799,18 @@ cd -
 
 sh compile.sh ernie
 
-echo "demo 5.13: gpu-tuned_dynamic_shape_ernie_model_4"
+echo "demo 5.15.1: gpu-tuned_dynamic_shape_ernie_model_4 离线tune测试"
 # 离线tune测试
 ./build/ernie --model_dir nlp_inference_model/ernie_model_4 --tune
 count_error
 
+
+echo "demo 5.15.2: gpu-tuned_dynamic_shape_ernie_model_4 动态shape及序列化测试"
 # 动态shape及序列化测试
 ./build/ernie --model_dir nlp_inference_model/ernie_model_4 --tuned_dynamic_shape --serialize
 count_error
 
+echo "demo 5.15.3: gpu-tuned_dynamic_shape_ernie_model_4 动态shape及反序列化测试"
 # 动态shape及反序列化测试
 ./build/ernie --model_dir nlp_inference_model/ernie_model_4 --tuned_dynamic_shape --serialize
 count_error
@@ -817,12 +851,13 @@ count_error
 demo=`expr ${demo} + 1`
 
 
-echo "demo 8: gpu_resnet_50_mix"
+echo "demo 8.1: gpu_resnet_50_multi_stream"
 # 运行 GPU 多流预测样例 
 # 该功能 develop 和 2.4 后可用
 cd ../multi_stream && sed -i "s/TensorRT-7.1.3.4/TensorRT-8.0.3.4/" compile.sh && sh run.sh
 count_error
 
+echo "demo 8.2: gpu_resnet_50_batch_stream"
 # Batch Stream 测试
 cd ../experimental/batch_stream/ && sed -i "s/TensorRT-7.1.3.4/TensorRT-8.0.3.4/" compile.sh && sh run.sh
 count_error
