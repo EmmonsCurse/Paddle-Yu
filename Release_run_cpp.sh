@@ -575,6 +575,8 @@ echo "demo 8.1: gpu_resnet_50_multi_stream"
 cd ../multi_stream && sed -i "s/TensorRT-7.1.3.4/TensorRT-8.0.3.4/" compile.sh && sh run.sh
 count_error
 
+
+
 echo "demo 8.2: gpu_resnet_50_batch_stream"
 # Batch Stream 测试
 cd ../experimental/batch_stream/ && sed -i "s/TensorRT-7.1.3.4/TensorRT-8.0.3.4/" compile.sh && sh run.sh
