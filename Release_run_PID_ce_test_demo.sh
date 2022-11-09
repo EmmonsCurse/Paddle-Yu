@@ -610,9 +610,9 @@ git clone https://github.com/PaddlePaddle/PaddleDetection.git --depth=1
 cd PaddleDetection
 
 # 安装环境依赖
-python setup.py build
-python setup.py install
-# python -m pip install -r requirements.txt -i https://mirror.baidu.com/pypi/simple --trusted-host mirror.b+aidu.com
+# python setup.py build
+# python setup.py install
+python -m pip install -r requirements.txt -i https://mirror.baidu.com/pypi/simple
 
 mkdir pretrained
 mkdir inference_model
