@@ -554,7 +554,6 @@ count_error
 # demo 7 gpu-gpu_fp16
 demo=`expr ${demo} + 1`
 
-
 echo "demo 7.1: gpu_resnet_50_native"
 # 使用原生 GPU 运行样例
 cd ../gpu_fp16 && sed -i "s/TensorRT-7.1.3.4/TensorRT-8.0.3.4/" compile.sh && sh run.sh
@@ -564,6 +563,16 @@ echo "demo 7.2: gpu_resnet_50_mix"
 # 使用 GPU 混合精度推理 运行样例
 ./build/resnet50_gpu_fp16 --model_file resnet50/inference.pdmodel --params_file resnet50/inference.pdiparams --use_gpu_fp16=1
 count_error
+
+
+# demo 7-7 gpu-Pinned_Memory
+demo=`expr ${demo} + 1`
+
+echo "demo 7.1: gpu_resnet_50_native"
+# 使用原生 GPU 运行样例
+cd ../pinned_memory && sed -i "s/TensorRT-7.1.3.4/TensorRT-8.0.3.4/" compile.sh && sh run.sh
+count_error
+
 
 # demo 8 gpu-multi_stream
 demo=`expr ${demo} + 1`
