@@ -1,5 +1,5 @@
 #!/bin/bash
-set +x
+set -x
 pwd
 
 git clone https://github.com/PaddlePaddle/Paddle-Inference-Demo.git --depth=1
