@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x
+set +x
 pwd
 
 git clone https://github.com/PaddlePaddle/Paddle-Inference-Demo.git --depth=1
@@ -9,12 +9,12 @@ error=0
 demo=0
 case=0
 
-echo "============= The path of Paddle-Inference-Demo Test failed cases  =============" >> /workspace/Paddle-Yu/Paddle-Inference-Demo/test_result.txt
+echo "============= The path of Paddle-Inference-Demo Test failed cases  =============" >> /workspace/continuous_evaluation/src/Paddle-Inference-Demo/test_result.txt
 # 定义 error 计算方法 
 count_error() {
     if [ $? -ne 0 ]; then
         error=`expr ${error} + 1`
-        echo ${PWD} >> /workspace/Paddle-Yu/Paddle-Inference-Demo/test_result.txt
+        echo ${PWD} >> /workspace/continuous_evaluation/src/Paddle-Inference-Demo/test_result.txt
     fi
     case=`expr ${case} + 1`
 }
@@ -925,6 +925,6 @@ echo "total demos: "${demo}
 echo "total cases: "${case}
 echo "total errors: "${error}
 
-cat /workspace/Paddle-Yu/Paddle-Inference-Demo/test_result.txt
+cat /workspace/continuous_evaluation/src/Paddle-Inference-Demo/test_result.txt
 
 exit ${error}
