@@ -2,6 +2,12 @@
 set -x
 pwd
 
+project_path=`pwd`
+export project_path
+echo -e "\033[33m project_path is : ${project_path} \033[0m"
+report_path="${project_path}/report"
+mkdir -p ${report_path}
+
 git clone https://github.com/PaddlePaddle/Paddle-Inference-Demo.git --depth=1
 cd Paddle-Inference-Demo/python/cpu/resnet50
 
@@ -9,12 +15,12 @@ error=0
 demo=0
 case=0
 
-echo "============= The path of Paddle-Inference-Demo Test failed cases  =============" >> /workspace/continuous_evaluation/src/Paddle-Inference-Demo/test_result.txt
+echo "============= The path of Paddle-Inference-Demo Test failed cases  =============" >> ${project_path}/Paddle-Inference-Demo/test_result.txt
 # 定义 error 计算方法 
 count_error() {
     if [ $? -ne 0 ]; then
         error=`expr ${error} + 1`
-        echo ${PWD} >> /workspace/continuous_evaluation/src/Paddle-Inference-Demo/test_result.txt
+        echo ${PWD} >> ${project_path}/Paddle-Inference-Demo/test_result.txt
     fi
     case=`expr ${case} + 1`
 }
@@ -38,12 +44,12 @@ fi
 
 echo "demo 1.1 resnet50_mkldnn:"
 # 使用 oneDNN 运行样例
-python infer_resnet.py --model_file=./resnet50/inference.pdmodel --params_file=./resnet50/inference.pdiparams
+python -m pytest infer_resnet.py --model_file=./resnet50/inference.pdmodel --params_file=./resnet50/inference.pdiparams --alluredir=${report_path}
 count_error
 
 echo "demo 1.2 resnet50_onnxruntime:"
 # 使用 OnnxRuntime 预测样例
-python infer_resnet.py --model_file=./resnet50/inference.pdmodel --params_file=./resnet50/inference.pdiparams --use_onnxruntime=1
+python -m pytest infer_resnet.py --model_file=./resnet50/inference.pdmodel --params_file=./resnet50/inference.pdiparams --use_onnxruntime=1 --alluredir=${report_path}
 count_error
 
 
@@ -304,6 +310,6 @@ echo "total demos: "${demo}
 echo "total cases: "${case}
 echo "total errors: "${error}
 
-cat /workspace/continuous_evaluation/src/Paddle-Inference-Demo/test_result.txt
+cat ${project_path}/Paddle-Inference-Demo/test_result.txt
 
 exit ${error}
