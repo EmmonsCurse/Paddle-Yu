@@ -70,12 +70,12 @@ fi
 
 echo "demo 2.1 yolov3_mkldnn:"
 # 使用 oneDNN 运行样例
-python infer_yolov3.py --model_file=./yolov3_r50vd_dcn_270e_coco/model.pdmodel --params_file=./yolov3_r50vd_dcn_270e_coco/model.pdiparams
+python -m pytest infer_yolov3.py --model_file=./yolov3_r50vd_dcn_270e_coco/model.pdmodel --params_file=./yolov3_r50vd_dcn_270e_coco/model.pdiparams --alluredir=${report_path}
 count_error
 
 echo "demo 2.2 yolov3_onnxruntime:"
 # 使用 OnnxRuntime 预测样例 - error
-python infer_yolov3.py --model_file=./yolov3_r50vd_dcn_270e_coco/model.pdmodel --params_file=./yolov3_r50vd_dcn_270e_coco/model.pdiparams --use_onnxruntime=1
+python -m pytest infer_yolov3.py --model_file=./yolov3_r50vd_dcn_270e_coco/model.pdmodel --params_file=./yolov3_r50vd_dcn_270e_coco/model.pdiparams --use_onnxruntime=1 --alluredir=${report_path}
 count_error
 
 
@@ -91,7 +91,7 @@ if [ ! -f ILSVRC2012_val_00000247.jpeg ]; then
     wget -q https://paddle-inference-dist.bj.bcebos.com/inference_demo/python/resnet50/ILSVRC2012_val_00000247.jpeg
 fi
 
-python infer_share_external_data.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams
+python -m pytest infer_share_external_data.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --alluredir=${report_path}
 count_error
 
 
@@ -107,7 +107,7 @@ if [ ! -f ILSVRC2012_val_00000247.jpeg ]; then
     wget -q https://paddle-inference-dist.bj.bcebos.com/inference_demo/python/resnet50/ILSVRC2012_val_00000247.jpeg
 fi
 
-python threads_demo.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --thread_num=2
+python -m pytest threads_demo.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --thread_num=2 --alluredir=${report_path}
 count_error
 
 
@@ -134,37 +134,37 @@ fi
 
 echo "demo 6.1: gpu_resnet50_native:"
 # 使用原生 GPU 运行样例
-python infer_resnet.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams
+python -m pytest infer_resnet.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --alluredir=${report_path}
 count_error
 
 echo "demo 6.2: gpu_resnet50_mix:"
 # 使用 GPU 混合精度推理 运行样例
 # develop 分支下 -error
-python infer_resnet.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --run_mode=gpu_fp16
+python -m pytest infer_resnet.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --run_mode=gpu_fp16 --alluredir=${report_path}
 count_error
 
 echo "demo 6.3: fp32_resnet50:"
 # 使用 Trt Fp32 运行样例
-python infer_resnet.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --run_mode=trt_fp32
+python -m pytest infer_resnet.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --run_mode=trt_fp32 --alluredir=${report_path}
 count_error
 
 echo "demo 6.4: fp16_resnet50:"
 # 使用 Trt Fp16 运行样例
-python infer_resnet.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --run_mode=trt_fp16
+python -m pytest infer_resnet.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --run_mode=trt_fp16 --alluredir=${report_path}
 count_error
 
 echo "demo 6.5.1: trt_int8_resnet50_generate:"
 # 使用 Trt Int8 运行样例
-python infer_resnet.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --run_mode=trt_int8
+python -m pytest infer_resnet.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --run_mode=trt_int8 --alluredir=${report_path}
 count_error
 
 echo "demo 6.5.2: trt_int8_resnet50_generate:"
-python infer_resnet.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --run_mode=trt_int8
+python -m pytest infer_resnet.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --run_mode=trt_int8 --alluredir=${report_path}
 count_error
 
 echo "demo 6.6: Try dynamic shape_resnet50:"
 # 使用 Try dynamic shape 运行样例 -error
-python infer_resnet.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --run_mode=trt_fp32 --use_dynamic_shape=1
+python -m pytest infer_resnet.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --run_mode=trt_fp32 --use_dynamic_shape=1 --alluredir=${report_path}
 count_error
 
 
@@ -181,33 +181,33 @@ fi
 
 echo "demo 7.1: gpu_yolov3_native:"
 # 使用原生 GPU 运行样例
-python infer_yolov3.py --model_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdmodel --params_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdiparams
+python -m pytest infer_yolov3.py --model_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdmodel --params_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdiparams --alluredir=${report_path}
 count_error
 
 echo "demo 7.2: fp32_yolov3:"
 # 使用 Trt Fp32 运行样例
-python infer_yolov3.py --model_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdmodel --params_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdiparams --run_mode=trt_fp32
+python -m pytest infer_yolov3.py --model_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdmodel --params_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdiparams --run_mode=trt_fp32 --alluredir=${report_path}
 count_error
 
 
 echo "demo 7.3: fp16_yolov3:"
 # 使用 Trt Fp16 运行样例
-python infer_yolov3.py --model_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdmodel --params_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdiparams --run_mode=trt_fp16
+python -m pytest infer_yolov3.py --model_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdmodel --params_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdiparams --run_mode=trt_fp16 --alluredir=${report_path}
 count_error
 
 
 echo "demo 7.4.1: trt_int8_yolov3_generate:"
 # 使用 Trt Int8 运行样例
-python infer_yolov3.py --model_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdmodel --params_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdiparams --run_mode=trt_int8
+python -m pytest infer_yolov3.py --model_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdmodel --params_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdiparams --run_mode=trt_int8 --alluredir=${report_path}
 count_error
 
 echo "demo 7.4.2: trt_int8_yolov3:"
-python infer_yolov3.py --model_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdmodel --params_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdiparams --run_mode=trt_int8
+python -m pytest infer_yolov3.py --model_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdmodel --params_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdiparams --run_mode=trt_int8 --alluredir=${report_path}
 count_error
 
 echo "demo 7.5: trt_dynamic_shape_yolov3:"
 # 使用 Try dynamic shape 运行样例 -error
-python infer_yolov3.py --model_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdmodel --params_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdiparams --run_mode=trt_fp32 --use_dynamic_shape=1
+python -m pytest infer_yolov3.py --model_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdmodel --params_file=../../cpu/yolov3/yolov3_r50vd_dcn_270e_coco/model.pdiparams --run_mode=trt_fp32 --use_dynamic_shape=1 --alluredir=${report_path}
 count_error
 
 
@@ -222,12 +222,12 @@ sed -i "s/is not/!=/" infer_tune.py
 # 首先需要针对业务数据进行离线 tune，来获取计算图中所有中间 tensor 的 shape 范围，并将其存储在 config 中配置的 shape_range_info.pbtxt 文件中
 
 echo "demo 8.1: gpu_tune:"
-python infer_tune.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --tune 1
+python -m pytest infer_tune.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --tune 1 --alluredir=${report_path}
 count_error
 
 echo "demo 8.2: gpu_tuned_dynamic_shape:"
 # 有了离线 tune 得到的 shape 范围信息后，您可以使用该文件自动对所有的 trt 子图设置其输入的 shape 范围。
-python infer_tune.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --use_gpu=1 --use_trt 1 --tuned_dynamic_shape 1
+python -m pytest infer_tune.py --model_file=../../cpu/resnet50/resnet50/inference.pdmodel --params_file=../../cpu/resnet50/resnet50/inference.pdiparams --use_gpu=1 --use_trt 1 --tuned_dynamic_shape 1 --alluredir=${report_path}
 count_error
 
 
@@ -247,7 +247,7 @@ if [ ! -d elmo_data ]; then
     tar xzf elmo_data.tgz
 fi
 
-python infer.py
+python -m pytest infer.py --alluredir=${report_path}
 count_error
 
 
@@ -256,7 +256,7 @@ echo "demo 10: mask_detection:"
 demo=`expr ${demo} + 1`
 cd ../mask_detection/
 
-python cam_video.py
+python -m pytest cam_video.py --alluredir=${report_path}
 count_error
 
 
@@ -296,13 +296,13 @@ count_error
 echo "demo 11.1: LSTM_INT8_thread:"
 # 1 thread
 # run fp32 model
-python model_test.py --model_path=./lstm_fp32_model --data_path=./quant_lstm_input_data --use_analysis=False --num_threads=1
+python -m pytest model_test.py --model_path=./lstm_fp32_model --data_path=./quant_lstm_input_data --use_analysis=False --num_threads=1 --alluredir=${report_path}
 count_error
 
 echo "demo 11.2: LSTM_INT8_4_threads:"
 # 4 thread
 # run fp32 model
-python model_test.py --model_path=./lstm_fp32_model --data_path=./quant_lstm_input_data --use_analysis=False --num_threads=4
+python -m pytest model_test.py --model_path=./lstm_fp32_model --data_path=./quant_lstm_input_data --use_analysis=False --num_threads=4 --alluredir=${report_path}
 count_error
 
 
