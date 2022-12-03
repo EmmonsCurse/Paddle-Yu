@@ -909,7 +909,7 @@ demo=`expr ${demo} + 1`
 
 
 echo "demo 13: mixed-LIC2020"
-# demo 13 mixed-LIC2020
+# demo 13 cpp_mixed_LIC2020
 demo=`expr ${demo} + 1`
 
 # 运行C++ LIC2020关系抽取 demo
@@ -918,6 +918,17 @@ cd ../../mixed/LIC2020/
 sed -i "s/TensorRT-7.1.3.4/TensorRT-8.0.3.4/" compile.sh
 
 sed -i "s#${work_path}/../lib/#${work_path}/../../lib/#" compile.sh && sh run.sh 
+count_error
+
+
+echo "demo 14: cpp_mixed_internal"
+# demo 14 cpp_mixed_internal
+demo=`expr ${demo} + 1`
+
+# 运行 C++ internal demo
+cd ../internal
+
+sed -i "s/TensorRT-7.1.3.4/TensorRT-8.0.3.4/" compile.sh && sh compile.sh
 count_error
 
 
