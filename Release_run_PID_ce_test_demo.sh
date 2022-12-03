@@ -904,8 +904,16 @@ count_error
 
 echo "demo 12: advanced x86_gru_int8"
 # demo 12 advanced x86_gru_int8
-# 需要在 manylinux_cpu_avx_mkl_gcc82 预测库下
 demo=`expr ${demo} + 1`
+cd ../
+
+wget -q https://paddle-inference-dist.cdn.bcebos.com/int8/QAT_models/GRU_quant_acc.tar.gz
+tar -xzvf GRU_quant_acc.tar.gz
+mkdir GRU_eval_int8
+git clone https://github.com/PaddlePaddle/Paddle.git --depth=1
+python Paddle/python/paddle/fluid/contrib/slim/tests/save_quant_model.py --quant_model_path GRU_quant_acc --int8_model_save_path GRU_eval_int8 --ops_to_quantize "multi_gru"
+sed -i "s#LIB_DIR=\$HOME/test/Paddle-Inference-Demo/c++/x86_gru_int8/paddle_inference#LIB_DIR=../../lib/paddle_inference#" run.sh && sh run.sh
+count_error
 
 
 echo "demo 13: mixed-LIC2020"
