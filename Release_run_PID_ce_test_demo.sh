@@ -936,7 +936,7 @@ demo=`expr ${demo} + 1`
 # 运行 C++ internal demo
 cd ../internal
 
-sed -i "s/TensorRT-7.1.3.4/TensorRT-8.0.3.4/" compile.sh && sh compile.sh
+sed -i "s/TensorRT-7.2.3.4/TensorRT-8.0.3.4/" compile.sh && sh compile.sh
 count_error
 
 
