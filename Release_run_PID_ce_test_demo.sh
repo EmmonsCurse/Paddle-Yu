@@ -421,7 +421,7 @@ count_error
 
 echo "demo 4.5: trt_dynamic_shape_yolov3:"
 # 使用 TensorRT dynamic shape 运行样例（以 Fp32 为例）-error
-./build/yolov3_test --model_file yolov3_r50vd_dcn_270e_coco/inference.pdmodel --params_file yolov3_r50vd_dcn_270e_coco/inference.pdiparams --run_mode=trt_fp32 --use_dynamic_shape=1
+./build/yolov3_test --model_file yolov3_r50vd_dcn_270e_coco/model.pdmodel --params_file yolov3_r50vd_dcn_270e_coco/model.pdiparams --run_mode=trt_fp32 --use_dynamic_shape=1
 count_error
 
 
