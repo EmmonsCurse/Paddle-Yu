@@ -249,6 +249,9 @@ echo "demo 10: mixed_mask_detection:"
 # demo 10: 口罩检测预测样例
 demo=`expr ${demo} + 1`
 cd ../mask_detection/
+cd models
+sh model_downloads.sh
+cd ..
 
 python cam_video.py
 count_error
@@ -657,9 +660,6 @@ echo "demo 5.8.3: tuned_dynamic_shape_yolov3_darknet53_270e_coco_动态shape及�
 ./build/detect --model_file inference_model/yolov3_darknet53_270e_coco/model.pdmodel --params_file inference_model/yolov3_darknet53_270e_coco/model.pdiparams --hs="608" --ws="608" --no_seen_hs="416" --no_seen_ws="416" --tuned_dynamic_shape --serialize
 count_error
 
-# config 修改
-sed -i "75s#// config#config#g" detect.cc
-sh compile.sh detect
 
 echo "demo 5.9.1: tuned_dynamic_shape_ssd_mobilenet_v1_300_120e_voc_离线tune测试"
 # ssd_mobilenet_v1_300_120e_voc
@@ -667,25 +667,34 @@ echo "demo 5.9.1: tuned_dynamic_shape_ssd_mobilenet_v1_300_120e_voc_离线tune�
 ./build/detect --model_file inference_model/ssd_mobilenet_v1_300_120e_voc//model.pdmodel --params_file inference_model/ssd_mobilenet_v1_300_120e_voc//model.pdiparams --hs="300" --ws="300" --tune
 count_error
 
+# config 修改
+sed -i "75s#// config#config#g" detect.cc
+sh compile.sh detect
+
 echo "demo 5.9.2: tuned_dynamic_shape_ssd_mobilenet_v1_300_120e_voc_动态shape及序列化测试"
 # 动态shape及序列化测试（注意：目前需要config加配置：config->Exp_DisableTensorRtOPs({"elementwise_add"});）
 ./build/detect --model_file inference_model/ssd_mobilenet_v1_300_120e_voc//model.pdmodel --params_file inference_model/ssd_mobilenet_v1_300_120e_voc//model.pdiparams --hs="300" --ws="300" --no_seen_hs="416" --no_seen_ws="416" --tuned_dynamic_shape --serialize
 count_error
 
+sh compile.sh detect
 echo "demo 5.9.3: tuned_dynamic_shape_ssd_mobilenet_v1_300_120e_voc_动态shape及反序列化测试"
 # 动态shape及反序列化测试（注意：目前需要config加配置：config->Exp_DisableTensorRtOPs({"elementwise_add"});）
 ./build/detect --model_file inference_model/ssd_mobilenet_v1_300_120e_voc//model.pdmodel --params_file inference_model/ssd_mobilenet_v1_300_120e_voc//model.pdiparams --hs="300" --ws="300" --no_seen_hs="416" --no_seen_ws="416" --tuned_dynamic_shape --serialize
 count_error
 
-# 修改
-# sed -i "s#"roi_align"#"roi_align\",\"elementwise_add"#" detect.cc
-# sh compile.sh detect
 
 echo "demo 5.10.1: tuned_dynamic_shape_faster_rcnn_r50_fpn_1x_coco_离线tune测试"
+sed -i "75s#config#// config#g" detect.cc
+sh compile.sh detect
+
 # faster_rcnn_r50_fpn_1x_coco
 # 离线tune测试
 ./build/detect --model_file inference_model/faster_rcnn_r50_fpn_1x_coco/model.pdmodel --params_file inference_model/faster_rcnn_r50_fpn_1x_coco/model.pdiparams --hs="608" --ws="608" --tune
 count_error
+
+# 修改
+sed -i "s#"roi_align"#"roi_align\",\"elementwise_add"#" detect.cc
+sh compile.sh detect
 
 echo "demo 5.10.2: tuned_dynamic_shape_faster_rcnn_r50_fpn_1x_coco_动态shape及序列化测试"
 # 动态shape及序列化测试（注意：目前需要config加配置：config->Exp_DisableTensorRtOPs({"roi_align", "elementwise_add"});）
@@ -700,9 +709,15 @@ count_error
 
 echo "demo 5.11.1: tuned_dynamic_shape_mask_rcnn_r50_vd_fpn_2x_coco_离线tune测试"
 # mask_rcnn_r50_vd_fpn_2x_coco
+sed -i "s#"roi_align\",\"elementwise_add"#"roi_align"#" detect.cc
+sh compile.sh detect
+
 # 离线tune测试
 ./build/detect --model_file inference_model/mask_rcnn_r50_vd_fpn_2x_coco/model.pdmodel --params_file inference_model/mask_rcnn_r50_vd_fpn_2x_coco/model.pdiparams --hs="608" --ws="608" --tune
 count_error
+
+sed -i "s#"roi_align"#"roi_align\",\"elementwise_add"#" detect.cc
+sh compile.sh detect
 
 echo "demo 5.11.2: tuned_dynamic_shape_mask_rcnn_r50_vd_fpn_2x_coco_动态shape及序列化测试"
 # 动态shape及序列化测试（注意：目前需要config加配置：config->Exp_DisableTensorRtOPs({"roi_align", "elementwise_add"});）
