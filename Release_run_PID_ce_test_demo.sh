@@ -873,6 +873,7 @@ count_error
 
 echo "demo 10: advanced_custom_operator"
 # demo 10 advanced_custom_operator
+demo=`expr ${demo} + 1`
 # 自定义算子模型构建运行示例
 cd ../../../advanced/custom-operator/ && sed -i "s/WITH_ONNXRUNTIME=ON/WITH_ONNXRUNTIME=OFF/" compile.sh && sed -i "s/TensorRT-7.1.3.4/TensorRT-8.0.3.4/" compile.sh && sh run.sh
 count_error
